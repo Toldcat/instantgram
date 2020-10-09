@@ -1,25 +1,21 @@
 import React, { useEffect, useCallback } from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 //import useAuth hook
 import { useAuth } from '../context/userContext'
 
-const LoginPage = () => {
+const App = () => {
   const { user } = useAuth()
-  return (
-    <div>
-      <p>{`User ID: ${user ? user.uid : 'no user signed in'}`}</p>
-      <p>
-        <Link href='/photowall'>
-          <a>Go to authenticated route</a>
-        </Link>
-      </p>
-      <p>
-        <Link href='/login'>
-          <a>Login</a>
-        </Link>
-      </p>
-    </div>
-  )
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/photowall')
+    } else {
+      router.push('/login')
+    }
+  }, [user])
+
+  return <p>Loading..</p>
 }
 
-export default LoginPage
+export default App
