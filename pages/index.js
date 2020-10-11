@@ -1,7 +1,8 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useContext } from 'react'
 import { useRouter } from 'next/router'
 //import useAuth hook
 import { useAuth } from '../context/userContext'
+import { UploadContext } from '../context/uploadContext'
 
 const App = () => {
   const { user } = useAuth()

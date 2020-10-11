@@ -1,10 +1,13 @@
 import '../styles/globals.css'
 import { AuthProvider } from '../context/userContext'
+import { UploadProvider } from '../context/uploadContext'
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <UploadProvider>
+        <Component {...pageProps} />
+      </UploadProvider>
     </AuthProvider>
   )
 }

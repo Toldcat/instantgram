@@ -10,6 +10,7 @@ const AuthContext = createContext({
 //setup a provider wrapper for main app
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [uid, setUid] = useState(null)
 
   useEffect(() => {
     return firebase.auth().onIdTokenChanged(async (user) => {
@@ -21,12 +22,15 @@ export const AuthProvider = ({ children }) => {
 
       const token = await user.getIdToken()
       setUser(user)
+      setUid(user.uid)
       nookies.set(undefined, 'token', token)
     })
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, uid }}>
+      {children}
+    </AuthContext.Provider>
   )
 }
 
